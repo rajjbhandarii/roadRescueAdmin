@@ -63,12 +63,12 @@
             Password
             <input name="providerPassword" [(ngModel)]="newProvider.password" required type="password" />
           </label>
-          <label>
+          <!-- <label>
             Status
             <select name="providerStatus" [(ngModel)]="newProvider.status" required>
               <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
             </select>
-          </label>
+          </label> -->
           <button type="submit" [disabled]="isLoading || providerForm.invalid">Add Provider</button>
         </form>
       </article>
@@ -94,11 +94,7 @@
             </td>
             <td>
               <ng-container *ngIf="editingUserId === user._id; else userEmailText">
-                <input
-                  type="email"
-                  [(ngModel)]="editUserDraft.email"
-                  [ngModelOptions]="{ standalone: true }"
-                />
+                <input type="email" [(ngModel)]="editUserDraft.email" [ngModelOptions]="{ standalone: true }" />
               </ng-container>
               <ng-template #userEmailText>{{ user.email }}</ng-template>
             </td>
@@ -129,27 +125,45 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Status</th>
+            <!-- <th>Status</th> -->
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let provider of providers">
-            <td>{{ provider.serviceProviderName }}</td>
-            <td>{{ provider.email }}</td>
             <td>
-              <select
-                [ngModel]="provider.status || 'pending'"
-                [ngModelOptions]="{ standalone: true }"
-                (ngModelChange)="updateProviderStatus(provider, $event)"
-              >
-                <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
-              </select>
+              <ng-container *ngIf="editingProviderId === provider._id; else providerNameText">
+                <input [(ngModel)]="editProviderDraft.serviceProviderName"
+                  [ngModelOptions]="{ standalone: true }" />
+              </ng-container>
+              <ng-template #providerNameText>{{ provider.serviceProviderName }}</ng-template>
             </td>
             <td>
-              <button type="button" class="danger" (click)="deleteProvider(provider.serviceProviderName)">
-                Delete
-              </button>
+              <ng-container *ngIf="editingProviderId === provider._id; else providerEmailText">
+                <input type="email" [(ngModel)]="editProviderDraft.email"
+                  [ngModelOptions]="{ standalone: true }" />
+              </ng-container>
+              <ng-template #providerEmailText>{{ provider.email }}</ng-template>
+            </td>
+            <!-- <td>
+              <select [ngModel]="provider.status || 'pending'" [ngModelOptions]="{ standalone: true }"
+                (ngModelChange)="updateProviderStatus(provider, $event)">
+                <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+              </select>
+            </td> -->
+            <td>
+              <div class="action-group" *ngIf="editingProviderId === provider._id; else providerRowActions">
+                <button type="button" (click)="saveProviderEdit(provider._id)">Save</button>
+                <button type="button" class="secondary" (click)="cancelProviderEdit()">Cancel</button>
+              </div>
+              <ng-template #providerRowActions>
+                <div class="action-group">
+                  <button type="button" class="secondary" (click)="startProviderEdit(provider)">Edit</button>
+                  <button type="button" class="danger" (click)="deleteProvider(provider.serviceProviderName)">
+                    Delete
+                  </button>
+                </div>
+              </ng-template>
             </td>
           </tr>
           <tr *ngIf="providers.length === 0">
