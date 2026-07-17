@@ -1,0 +1,112 @@
+:host {
+  display: block;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card,
+.table-card {
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+
+.auth-card {
+  max-width: 420px;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+input,
+select,
+button {
+  padding: 8px;
+  border: 1px solid #c6d0df;
+  border-radius: 6px;
+}
+
+button {
+  cursor: pointer;
+  background: #0f62fe;
+  color: #fff;
+  border: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.danger {
+  background: #d73027;
+}
+
+button.secondary {
+  background: #6f7785;
+}
+
+.action-group {
+  display: flex;
+  gap: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+}
+
+.message {
+  margin: 8px 0 16px;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.success {
+  background: #e5f6e9;
+  color: #1d6f2a;
+}
+
+.error {
+  background: #ffe9e7;
+  color: #9f1d16;
+}
