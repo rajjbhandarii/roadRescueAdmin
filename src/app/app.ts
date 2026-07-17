@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
-
+import { environment } from './environments/environment';
 interface AdminUser {
   _id: string;
   userName: string;
@@ -26,7 +26,7 @@ interface AdminProvider {
 })
 export class App implements OnInit {
   private readonly http = inject(HttpClient);
-  private readonly apiBase = 'http://localhost:3000';
+  private readonly apiBase = environment.baseUrl;
   private readonly adminTokenStorageKey = 'roadRescueAdminToken';
 
   readonly statusOptions = ['pending', 'approved', 'rejected'];
